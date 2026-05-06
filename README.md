@@ -4,6 +4,32 @@ Idea Launcher is a local Codex skill for turning rough app, tool, game, automati
 
 It is designed as a one-person software factory: clarify the idea quickly, cut scope hard, generate the right starting structure, and move Codex into implementation instead of stopping at planning docs.
 
+## How To Use
+
+Use it inside Codex:
+
+```text
+Use $idea-launcher in full-build mode. Build me a small web app called Signal Notes that turns rough notes into decisions, tasks, and follow-ups. Generate the project, implement the working UI, add tests, and run it locally.
+```
+
+Generate a runnable starter with one npm command:
+
+```powershell
+npx github:iice257/idea-launcher --name "Signal Notes" --idea "A web app that turns rough notes into decisions and tasks" --type web-app --out ./output
+```
+
+Or use PowerShell directly after cloning/installing the skill:
+
+```powershell
+python scripts/launch_project.py --name "Signal Notes" --idea "A web app that turns rough notes into decisions and tasks" --type web-app --out ./output
+```
+
+Install the skill into Codex with one PowerShell command:
+
+```powershell
+git clone https://github.com/iice257/idea-launcher.git "$env:USERPROFILE\.codex\skills\idea-launcher"
+```
+
 ## What It Does
 
 - Interviews lightly without over-questioning.
@@ -20,20 +46,13 @@ It is designed as a one-person software factory: clarify the idea quickly, cut s
 - `game`: canvas game loop with controls, restart, build script, and smoke test.
 - `data-tool`: CSV fixture, report generator, and tests.
 
-## Quick Start
+## Validate Output
 
 ```powershell
-python scripts/launch_project.py --name "Signal Notes" --idea "A web app that turns rough notes into decisions and tasks" --type web-app --out ./output
 python scripts/validate_placeholders.py ./output/signal-notes
 ```
 
 Then open the generated folder, read `AGENTS.md`, and run the commands listed there.
-
-## Codex Usage
-
-```text
-Use $idea-launcher in full-build mode. Build me a small web app called Signal Notes that turns rough notes into decisions, tasks, and follow-ups. Generate the project, implement the working UI, add tests, and run it locally.
-```
 
 ## Install
 
