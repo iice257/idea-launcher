@@ -15,13 +15,19 @@ Use $idea-launcher in full-build mode. Build me a small web app called Signal No
 Generate a runnable starter with one npm command:
 
 ```powershell
-npx github:iice257/idea-launcher --name "Signal Notes" --idea "A web app that turns rough notes into decisions and tasks" --type web-app --out ./output
+npx github:iice257/idea-launcher web-app "Signal Notes" "Turns rough notes into decisions and tasks"
 ```
 
 Or use PowerShell directly after cloning/installing the skill:
 
 ```powershell
-python scripts/launch_project.py --name "Signal Notes" --idea "A web app that turns rough notes into decisions and tasks" --type web-app --out ./output
+node scripts/idea-launcher.mjs web-app "Signal Notes" "Turns rough notes into decisions and tasks"
+```
+
+Long-form flags still work when you need custom output paths:
+
+```powershell
+npx github:iice257/idea-launcher --name "Signal Notes" --idea "Turns rough notes into decisions and tasks" --type web-app --out ./output
 ```
 
 Install the skill into Codex with one PowerShell command:
