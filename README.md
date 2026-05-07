@@ -6,6 +6,12 @@ It is designed as a one-person software factory: clarify the idea quickly, cut s
 
 ## How To Use
 
+Install the skill into Codex with one PowerShell command:
+
+```powershell
+git clone https://github.com/iice257/idea-launcher.git "$env:USERPROFILE\.codex\skills\idea-launcher"
+```
+
 Use it inside Codex:
 
 ```text
@@ -28,12 +34,6 @@ Long-form flags still work when you need custom output paths:
 
 ```powershell
 npx github:iice257/idea-launcher --name "Signal Notes" --idea "Turns rough notes into decisions and tasks" --type web-app --out ./output
-```
-
-Install the skill into Codex with one PowerShell command:
-
-```powershell
-git clone https://github.com/iice257/idea-launcher.git "$env:USERPROFILE\.codex\skills\idea-launcher"
 ```
 
 ## What It Does
