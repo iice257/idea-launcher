@@ -116,3 +116,18 @@ Behavior:
 - End by recommending one direction, one smaller version, and one thing not to build yet.
 
 Do not produce a large task plan until a direction is chosen.
+
+## Serious Pass Before Build
+
+Use before implementation when the prompt is already specific enough to act on. This is not a long planning phase; it is a short checkpoint that prevents Codex from building the wrong thing too confidently.
+
+Output:
+
+- Build summary
+- Assumptions
+- Pushbacks and risks
+- Suggestions
+- Current v1 boundary
+- Immediate execution plan
+
+If the user already asked to build and the assumptions are low-risk, continue into implementation after the serious pass. If one missing answer would change the stack, data model, auth, deployment, or primary workflow, ask that single question first.

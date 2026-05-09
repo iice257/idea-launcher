@@ -16,6 +16,14 @@ Extract these facts from the user's prompt before asking anything:
 
 If a fact is missing but a reasonable assumption is low-risk, state the assumption and continue.
 
+## Readiness Split
+
+Use a serious pass when the idea is already detailed enough to build. This means the prompt has a clear workflow, first user or usage context, likely platform/output, and at least one constraint or success signal. The serious pass should summarize the build, state assumptions, push back on risky scope, suggest improvements, and define the v1 boundary before implementation begins.
+
+Use brainstorm mode when the idea is a loose theme, a list of possible features, or an unclear product shape. Brainstorming should expand options and tradeoffs, then narrow to one recommended direction.
+
+Do not treat a detailed prompt as a reason to silently start coding. Treat it as a reason to make a brief but serious plan, then move.
+
 ## Question Budget
 
 Ask 0 questions when the idea can be shaped with assumptions.

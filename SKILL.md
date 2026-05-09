@@ -14,22 +14,41 @@ Turn vague ideas into practical project plans, starter folders, and execution pr
 - Always include both the good side and bad side before recommending a direction.
 - Treat the first useful shipped version as the default target. Push nice-to-haves into later milestones.
 - If the user asks to brainstorm, explore options, tradeoffs, and failure modes before converging.
-- If the user asks to build, shape only enough to prevent rework, then move into implementation.
+- If the user asks to build, run the prompt-readiness triage first, shape only enough to prevent rework, then move into implementation.
 - Respect local `AGENTS.md` and `MEMORY.md` instructions. If a durable preference or project fact is discovered, update the relevant memory file and mention the change.
 - Commit and push after major tasks when the active workspace instructions say to do so.
+
+## Prompt-Readiness Triage
+
+Classify the user's idea before choosing brainstorm, planning, or build behavior.
+
+**Detailed-enough prompt:** the prompt names the product or workflow, gives a target user or context, implies a platform or output, and has enough constraints to choose a first build without inventing the core product. Do not skip straight into code. First give a serious pass:
+
+- Summary of what will be built.
+- Assumptions you will use unless corrected.
+- Pushbacks, risks, and likely scope traps.
+- Suggestions that would improve the build without bloating v1.
+- The smallest credible v1 and what is explicitly not in v1.
+
+After that pass, proceed when the user already asked to build and no answer is needed to avoid wrong work.
+
+**Basic, half-formed, or unclear prompt:** the prompt is mostly a theme, name, vibe, feature pile, or unclear request. Use brainstorm mode or the clarifying pattern from `references/interview-workflow.md`. Ask only the 1-3 questions that change direction, and offer a default assumption path so the user can say "go".
+
+**Explicit brainstorm prompt:** expand options first, compare tradeoffs, then recommend one direction and one smaller version.
 
 ## Core Workflow
 
 1. **Capture the idea:** Restate the concept in one sentence, name the target user, and infer the likely project type: app, tool, game, automation, integration, content workflow, data product, or experiment.
-2. **Interview lightly:** Use `references/interview-workflow.md` to collect only the missing information needed to shape scope, risk, stack, and output.
-3. **Run the tradeoff pass:** List the good side, bad side, hidden complexity, and the smallest credible version.
-4. **Shape the project:** Use `references/project-shaping-rubric.md` across usefulness, scope, stack, data model, UI, workflows, automation, risks, verification, and deployment.
-5. **Select a mode:** Use `references/modes.md` for default launch, factory mode, sharpen-the-axe mode, or ship mode.
-6. **Produce artifacts:** Create or update the needed planning files using `assets/templates/`.
-7. **Prepare execution:** Convert decisions into atomic tasks, verification gates, subagent splits where allowed, and a first build prompt.
-8. **Generate a starter when useful:** In factory mode, use `scripts/launch_project.py` with a matching starter pack to create a project folder, then run `scripts/validate_placeholders.py` against the result.
-9. **Build the actual product:** In full-build mode, generate the starter, inspect the generated docs and source, then implement the project-specific behavior, UI/design, tests, and deploy config directly in the generated project.
-10. **Reinforce frontend quality:** For web apps, tools, dashboards, and games, apply `references/frontend-design.md` before coding UI. Favor fast static starters and only add heavier frontend stacks when the workflow justifies them.
+2. **Triage readiness:** Decide whether the prompt is detailed enough, basic/unclear, or explicitly brainstorm-oriented.
+3. **Interview lightly:** Use `references/interview-workflow.md` to collect only the missing information needed to shape scope, risk, stack, and output.
+4. **Run the tradeoff pass:** List the good side, bad side, hidden complexity, and the smallest credible version.
+5. **Shape the project:** Use `references/project-shaping-rubric.md` across usefulness, scope, stack, data model, UI, workflows, automation, risks, verification, and deployment.
+6. **Select a mode:** Use `references/modes.md` for default launch, factory mode, sharpen-the-axe mode, brainstorm mode, or ship mode.
+7. **Produce artifacts:** Create or update the needed planning files using `assets/templates/`.
+8. **Prepare execution:** Convert decisions into atomic tasks, verification gates, subagent splits where allowed, and a first build prompt.
+9. **Generate a starter when useful:** In factory mode, use `scripts/launch_project.py` with a matching starter pack to create a project folder, then run `scripts/validate_placeholders.py` against the result.
+10. **Build the actual product:** In full-build mode, generate the starter, inspect the generated docs and source, then implement the project-specific behavior, UI/design, tests, and deploy config directly in the generated project.
+11. **Reinforce frontend quality:** For web apps, tools, dashboards, and games, apply `references/frontend-design.md` before coding UI. Favor fast static starters and only add heavier frontend stacks when the workflow justifies them.
 
 ## Output Contract
 
@@ -108,7 +127,7 @@ Before finishing a launch plan, confirm:
 - The test plan verifies the highest-risk behavior first.
 - The deploy plan names the target environment, secrets, migration needs, and rollback path.
 - The first build prompt is self-contained enough for a fresh Codex thread to execute.
-- Generated starters have no unresolved `{{PLACEHOLDERS}}`.
+- Generated starters have no unresolved double-brace template placeholders.
 - Full-build outputs run locally and demonstrate the real core workflow.
 - Frontend outputs are fast to run, domain-specific, responsive, and free of generic placeholder UI.
 

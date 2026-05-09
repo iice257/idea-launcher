@@ -61,6 +61,25 @@ Scope cut:
 
 - No email sending until summaries are accurate.
 
+## Detailed Prompt Example
+
+Prompt:
+
+```text
+Use $idea-launcher to build a local tool that watches a folder of CSV exports, detects duplicate customer records, and writes a cleanup report for an ops teammate. Keep it local, use Python, and avoid a database in v1.
+```
+
+Correct behavior:
+
+- Treat it as detailed enough.
+- Give a serious pass with summary, assumptions, pushbacks, suggestions, and v1 boundary.
+- Then implement if the user asked to build.
+
+Incorrect behavior:
+
+- Silently generating code with no summary.
+- Asking broad questions like "what features do you want?"
+
 ## Game Example
 
 Prompt:

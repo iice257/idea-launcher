@@ -10,13 +10,28 @@ from pathlib import Path
 
 PLACEHOLDER = re.compile(r"\{\{[A-Z0-9_]+\}\}")
 DEFAULT_EXCLUDES = {".git", "node_modules", ".next", "dist", "build", "__pycache__"}
+DEFAULT_TEMPLATE_SOURCE_EXCLUDES = {
+    Path("assets/templates"),
+    Path("assets/blueprints"),
+}
 
 
-def iter_files(root: Path):
+def is_under(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
+def iter_files(root: Path, excludes: set[Path]):
     for path in root.rglob("*"):
         if not path.is_file():
             continue
         if any(part in DEFAULT_EXCLUDES for part in path.parts):
+            continue
+        relative = path.relative_to(root)
+        if any(relative == excluded or is_under(relative, excluded) for excluded in excludes):
             continue
         yield path
 
@@ -24,11 +39,19 @@ def iter_files(root: Path):
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate that generated project docs have no unresolved placeholders.")
     parser.add_argument("path", nargs="?", default=".", help="Project path to scan.")
+    parser.add_argument(
+        "--include-template-sources",
+        action="store_true",
+        help="Also scan this skill's intentional template and blueprint sources.",
+    )
     args = parser.parse_args()
 
     root = Path(args.path).resolve()
+    excludes = set()
+    if not args.include_template_sources:
+        excludes.update(DEFAULT_TEMPLATE_SOURCE_EXCLUDES)
     findings = []
-    for path in iter_files(root):
+    for path in iter_files(root, excludes):
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
